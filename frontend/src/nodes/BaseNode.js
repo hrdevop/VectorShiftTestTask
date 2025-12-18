@@ -18,24 +18,32 @@ export const BaseNode = ({
   const baseStyle = {
     width,
     height: height === 'auto' ? 'auto' : height,
-    minHeight: height === 'auto' ? '120px' : undefined,
-    border: 'none',
-    borderRadius: '16px',
+    minHeight: height === 'auto' ? '100px' : undefined,
+    border: '1px solid #E5E7EB',
+    borderRadius: '12px', // Slightly more rounded for premium feel
     padding: '0',
     backgroundColor: '#ffffff',
-    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)',
+    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.04)', // Softer shadow with more blur
     display: 'flex',
     flexDirection: 'column',
     position: 'relative',
-    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-    overflow: 'visible',
-    boxSizing: 'border-box',
-    ...style,
+    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
   };
 
   return (
-    <div style={baseStyle} className={`base-node ${className}`}>
-      {/* Input Handles */}
+    <div
+      style={baseStyle}
+      className={`base-node ${className}`}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1), 0 12px 24px rgba(0, 0, 0, 0.08)';
+        e.currentTarget.style.transform = 'translateY(-1px)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.04)';
+        e.currentTarget.style.transform = 'translateY(0)';
+      }}
+    >
+      {/* Input Handles - Enhanced with better visibility */}
       {inputHandles.map((handle, index) => (
         <Handle
           key={handle.id || `input-${index}`}
@@ -43,75 +51,74 @@ export const BaseNode = ({
           position={Position.Left}
           id={handle.id || `input-${index}`}
           style={{
-            width: '16px',
-            height: '16px',
-            background: '#667eea',
-            border: '3px solid #fff',
-            boxShadow: '0 2px 8px rgba(102, 126, 234, 0.4)',
+            width: '10px',
+            height: '10px',
+            background: '#fff',
+            border: `2px solid ${titleColor}`,
+            boxShadow: '0 0 0 2px rgba(255, 255, 255, 0.9), 0 2px 4px rgba(0, 0, 0, 0.1)',
+            left: '-6px',
+            zIndex: 10,
             transition: 'all 0.2s ease',
             ...handle.style
           }}
         />
       ))}
 
-      {/* Title Header */}
+      {/* Header - Better padding */}
       {title && (
-        <div style={{ 
-          background: `linear-gradient(135deg, ${titleColor} 0%, ${titleColor}dd 100%)`,
-          color: '#ffffff',
-          fontWeight: '700', 
-          padding: '12px 18px',
-          fontSize: '13px',
-          letterSpacing: '0.8px',
-          textTransform: 'uppercase',
-          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+        <div style={{
+          padding: '16px 16px 12px 16px', // Increased padding
           display: 'flex',
           alignItems: 'center',
           gap: '10px',
-          position: 'relative',
-          overflow: 'hidden',
-          flexShrink: 0
         }}>
+          {/* Accent Icon - More refined */}
           <div style={{
-            width: '8px',
-            height: '8px',
-            borderRadius: '50%',
-            background: '#fff',
-            boxShadow: '0 0 8px rgba(255, 255, 255, 0.8)',
-            flexShrink: 0
-          }} />
-          <span style={{ flex: 1 }}>{title}</span>
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            width: '60px',
-            height: '100%',
-            background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1))',
-            pointerEvents: 'none'
-          }} />
+            width: '28px',
+            height: '28px',
+            borderRadius: '8px',
+            backgroundColor: `${titleColor}18`, // Slightly more opacity
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: titleColor,
+            flexShrink: 0,
+          }}>
+            <div style={{
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
+              backgroundColor: titleColor,
+              boxShadow: `0 0 0 2px ${titleColor}30`
+            }} />
+          </div>
+
+          <span style={{
+            fontSize: '14px',
+            fontWeight: '600',
+            color: '#111827',
+            lineHeight: '1.4',
+            letterSpacing: '-0.01em'
+          }}>
+            {title}
+          </span>
         </div>
       )}
 
-      {/* Content */}
-      <div style={{ 
-        flex: '1 1 auto',
-        display: 'flex', 
-        flexDirection: 'column', 
-        gap: '16px',
-        padding: '16px',
-        backgroundColor: '#f8fafc',
-        minHeight: '80px',
-        overflow: 'visible',
-        boxSizing: 'border-box',
-        width: '100%',
-        alignItems: 'stretch',
-        justifyContent: 'flex-start'
+      {/* Content - More generous padding */}
+      <div style={{
+        padding: '0 16px 18px 16px', // Increased bottom padding
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px', // Increased gap between elements
+        fontSize: '13px',
+        color: '#6B7280',
+        flex: 1
       }}>
         {children}
       </div>
 
-      {/* Output Handles */}
+      {/* Output Handles - Enhanced */}
       {outputHandles.map((handle, index) => (
         <Handle
           key={handle.id || `output-${index}`}
@@ -119,11 +126,13 @@ export const BaseNode = ({
           position={Position.Right}
           id={handle.id || `output-${index}`}
           style={{
-            width: '16px',
-            height: '16px',
-            background: '#667eea',
-            border: '3px solid #fff',
-            boxShadow: '0 2px 8px rgba(102, 126, 234, 0.4)',
+            width: '10px',
+            height: '10px',
+            background: '#fff',
+            border: `2px solid ${titleColor}`,
+            boxShadow: '0 0 0 2px rgba(255, 255, 255, 0.9), 0 2px 4px rgba(0, 0, 0, 0.1)',
+            right: '-6px',
+            zIndex: 10,
             transition: 'all 0.2s ease',
             ...handle.style
           }}

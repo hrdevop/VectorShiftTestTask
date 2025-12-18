@@ -36,13 +36,13 @@ export const TransformNode = ({ id, data }) => {
       titleColor="#06b6d4"
       inputHandles={[{ id: `${id}-input` }]}
       outputHandles={[{ id: `${id}-output` }]}
-      width={260}
-      height={transformType === 'custom' ? 220 : 180}
+      width={280}
+      height={200}
     >
       <label style={{ display: 'flex', flexDirection: 'column' }}>
         <span style={labelStyle}>Transform Type</span>
-        <select 
-          value={transformType} 
+        <select
+          value={transformType}
           onChange={(e) => setTransformType(e.target.value)}
           style={{
             ...inputStyle,
@@ -72,9 +72,9 @@ export const TransformNode = ({ id, data }) => {
       {transformType === 'custom' && (
         <label style={{ display: 'flex', flexDirection: 'column' }}>
           <span style={labelStyle}>Function</span>
-          <input 
-            type="text" 
-            value={customFunction} 
+          <input
+            type="text"
+            value={customFunction}
             onChange={(e) => setCustomFunction(e.target.value)}
             placeholder="x => x.toUpperCase()"
             style={inputStyle}

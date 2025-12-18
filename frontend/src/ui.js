@@ -141,14 +141,11 @@ export const PipelineUI = () => {
     <>
       <div ref={reactFlowWrapper} style={{
         width: '100%',
-        height: 'calc(100vh - 100px)',
-        background: 'rgba(255, 255, 255, 0.4)',
-        backdropFilter: 'blur(10px)',
-        WebkitBackdropFilter: 'blur(10px)',
-        borderRadius: '16px',
-        margin: '20px auto',
-        border: '1px solid rgba(255, 255, 255, 0.6)',
-        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+        height: 'calc(100vh - 120px)',
+        margin: '0 auto',
+        border: 'none',
+        borderRadius: '0',
+        boxShadow: 'none',
         overflow: 'hidden'
       }}>
         <ReactFlow
@@ -165,11 +162,19 @@ export const PipelineUI = () => {
           snapGrid={[gridSize, gridSize]}
           connectionLineType='smoothstep'
         >
-          <Background color="#aaa" gap={gridSize} />
-          <Controls />
+          <Background color="#cbd5e1" gap={gridSize} variant="dots" size={1} />
+          <Controls style={{
+            background: '#fff',
+            border: '1px solid #e2e8f0',
+            borderRadius: '8px',
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+            padding: '4px'
+          }} />
           <MiniMap style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.8)',
-            border: '1px solid #e2e8f0'
+            backgroundColor: '#fff',
+            border: '1px solid #e2e8f0',
+            borderRadius: '8px',
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
           }} />
         </ReactFlow>
       </div>

@@ -16,27 +16,27 @@ export const InputNode = ({ id, data }) => {
   };
 
   const inputStyle = {
-    padding: '10px 14px',
-    fontSize: '13px',
-    border: '2px solid #e2e8f0',
-    borderRadius: '10px',
+    padding: '10px 12px',
+    fontSize: '14px',
+    border: '1px solid #E5E7EB',
+    borderRadius: '8px',
     backgroundColor: '#ffffff',
-    color: '#1e293b',
-    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+    color: '#111827',
+    transition: 'all 0.2s ease',
     outline: 'none',
     width: '100%',
     fontFamily: 'inherit',
     boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   };
 
   const labelStyle = {
     fontSize: '11px',
-    fontWeight: '700',
-    color: '#64748b',
-    marginBottom: '8px',
+    fontWeight: '600',
+    color: '#6B7280',
     textTransform: 'uppercase',
-    letterSpacing: '0.8px',
-    display: 'block',
+    letterSpacing: '0.05em',
   };
 
   return (
@@ -44,58 +44,69 @@ export const InputNode = ({ id, data }) => {
       id={id}
       title="Input"
       titleColor="#10b981"
+      inputHandles={[]}
       outputHandles={[{ id: `${id}-value` }]}
-      width={260}
-      height={180}
+      width={280}
+      height={230}
     >
-      <label style={{ display: 'flex', flexDirection: 'column' }}>
-        <span style={labelStyle}>Name</span>
-          <input 
-            type="text" 
-            value={currName} 
-            onChange={handleNameChange} 
+      <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+        <span style={labelStyle}>Field Name</span>
+        <input
+          type="text"
+          value={currName}
+          onChange={handleNameChange}
           style={inputStyle}
+          placeholder="Enter name..."
           onFocus={(e) => {
-            e.target.style.borderColor = '#667eea';
-            e.target.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1)';
-            e.target.style.transform = 'translateY(-1px)';
+            e.target.style.borderColor = '#10B981';
+            e.target.style.boxShadow = '0 0 0 3px rgba(16, 185, 129, 0.1)';
+            e.target.style.outline = 'none';
           }}
           onBlur={(e) => {
-            e.target.style.borderColor = '#e2e8f0';
+            e.target.style.borderColor = '#E5E7EB';
             e.target.style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.05)';
-            e.target.style.transform = 'translateY(0)';
           }}
-          />
-        </label>
-      <label style={{ display: 'flex', flexDirection: 'column' }}>
-        <span style={labelStyle}>Type</span>
-        <select 
-          value={inputType} 
-          onChange={handleTypeChange} 
-          style={{
-            ...inputStyle,
-            cursor: 'pointer',
-            appearance: 'none',
-            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23475569' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'right 12px center',
-            paddingRight: '36px',
-          }}
-          onFocus={(e) => {
-            e.target.style.borderColor = '#667eea';
-            e.target.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1)';
-            e.target.style.transform = 'translateY(-1px)';
-          }}
-          onBlur={(e) => {
-            e.target.style.borderColor = '#e2e8f0';
-            e.target.style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.05)';
-            e.target.style.transform = 'translateY(0)';
-          }}
-        >
+        />
+      </label>
+      <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+        <span style={labelStyle}>Data Type</span>
+        <div style={{ position: 'relative' }}>
+          <select
+            value={inputType}
+            onChange={handleTypeChange}
+            style={{
+              ...inputStyle,
+              appearance: 'none',
+              paddingRight: '30px',
+              cursor: 'pointer'
+            }}
+            onFocus={(e) => {
+              e.target.style.borderColor = '#10B981';
+              e.target.style.boxShadow = '0 0 0 3px rgba(16, 185, 129, 0.1)';
+              e.target.style.outline = 'none';
+            }}
+            onBlur={(e) => {
+              e.target.style.borderColor = '#E5E7EB';
+              e.target.style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.05)';
+            }}
+          >
             <option value="Text">Text</option>
             <option value="File">File</option>
           </select>
-        </label>
+          <div style={{
+            position: 'absolute',
+            right: '10px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            pointerEvents: 'none',
+            color: '#94a3b8'
+          }}>
+            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+        </div>
+      </label>
     </BaseNode>
   );
 }

@@ -31,13 +31,13 @@ export const SubmitButton = () => {
             }
 
             const result = await response.json();
-            
+
             // Display alert with results
             const message = `Pipeline Analysis Results:\n\n` +
-                          `Number of Nodes: ${result.num_nodes}\n` +
-                          `Number of Edges: ${result.num_edges}\n` +
-                          `Is DAG: ${result.is_dag ? 'Yes ✓' : 'No ✗'}`;
-            
+                `Number of Nodes: ${result.num_nodes}\n` +
+                `Number of Edges: ${result.num_edges}\n` +
+                `Is DAG: ${result.is_dag ? 'Yes ✓' : 'No ✗'}`;
+
             alert(message);
         } catch (error) {
             console.error('Error submitting pipeline:', error);
@@ -47,38 +47,40 @@ export const SubmitButton = () => {
 
     return (
         <div style={{
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center',
-            padding: '20px',
-            background: 'rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(10px)'
+            position: 'fixed',
+            top: '30px',
+            right: '30px',
+            zIndex: 1000,
         }}>
-            <button 
+            <button
                 type="button"
                 onClick={handleSubmit}
                 style={{
-                    padding: '12px 32px',
-                    fontSize: '16px',
+                    padding: '10px 20px',
+                    fontSize: '14px',
                     fontWeight: '600',
                     color: '#fff',
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    background: '#7c3aed', // Purple to match dashboard
                     border: 'none',
                     borderRadius: '8px',
                     cursor: 'pointer',
-                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                    transition: 'all 0.2s ease'
+                    boxShadow: '0 4px 6px -1px rgba(124, 58, 237, 0.3)',
+                    transition: 'all 0.2s ease',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px'
                 }}
                 onMouseEnter={(e) => {
-                    e.target.style.transform = 'translateY(-2px)';
-                    e.target.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.2)';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 8px 20px rgba(79, 70, 229, 0.6)';
                 }}
                 onMouseLeave={(e) => {
-                    e.target.style.transform = 'translateY(0)';
-                    e.target.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(79, 70, 229, 0.4)';
                 }}
             >
-                Submit Pipeline
+                <span role="img" aria-label="play" style={{ fontSize: '18px' }}>🚀</span>
+                <span>Run Pipeline</span>
             </button>
         </div>
     );
