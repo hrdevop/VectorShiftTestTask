@@ -1,0 +1,97 @@
+// conditionNode.js
+
+import { useState } from 'react';
+import { BaseNode } from './BaseNode';
+
+export const ConditionNode = ({ id, data }) => {
+  const [condition, setCondition] = useState(data?.condition || 'equals');
+  const [value, setValue] = useState(data?.value || '');
+
+  const inputStyle = {
+    padding: '10px 12px',
+    fontSize: '13px',
+    border: '2px solid #e2e8f0',
+    borderRadius: '8px',
+    backgroundColor: '#ffffff',
+    color: '#1e293b',
+    transition: 'all 0.2s ease',
+    outline: 'none',
+    width: '100%',
+    fontFamily: 'inherit',
+  };
+
+  const labelStyle = {
+    fontSize: '12px',
+    fontWeight: '600',
+    color: '#475569',
+    marginBottom: '6px',
+    textTransform: 'uppercase',
+    letterSpacing: '0.5px',
+  };
+
+  return (
+    <BaseNode
+      id={id}
+      title="Condition"
+      titleColor="#f59e0b"
+      inputHandles={[
+        { id: `${id}-input` },
+        { id: `${id}-compare`, style: { top: '60%' } }
+      ]}
+      outputHandles={[
+        { id: `${id}-true` },
+        { id: `${id}-false`, style: { top: '60%' } }
+      ]}
+      width={260}
+      height={180}
+    >
+      <label style={{ display: 'flex', flexDirection: 'column' }}>
+        <span style={labelStyle}>Condition</span>
+        <select 
+          value={condition} 
+          onChange={(e) => setCondition(e.target.value)}
+          style={{
+            ...inputStyle,
+            cursor: 'pointer',
+            appearance: 'none',
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23475569' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'right 12px center',
+            paddingRight: '36px',
+          }}
+          onFocus={(e) => {
+            e.target.style.borderColor = '#667eea';
+            e.target.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.1)';
+          }}
+          onBlur={(e) => {
+            e.target.style.borderColor = '#e2e8f0';
+            e.target.style.boxShadow = 'none';
+          }}
+        >
+          <option value="equals">Equals</option>
+          <option value="greater">Greater Than</option>
+          <option value="less">Less Than</option>
+          <option value="contains">Contains</option>
+        </select>
+      </label>
+      <label style={{ display: 'flex', flexDirection: 'column' }}>
+        <span style={labelStyle}>Value</span>
+        <input 
+          type="text" 
+          value={value} 
+          onChange={(e) => setValue(e.target.value)}
+          style={inputStyle}
+          onFocus={(e) => {
+            e.target.style.borderColor = '#667eea';
+            e.target.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.1)';
+          }}
+          onBlur={(e) => {
+            e.target.style.borderColor = '#e2e8f0';
+            e.target.style.boxShadow = 'none';
+          }}
+        />
+      </label>
+    </BaseNode>
+  );
+}
+
