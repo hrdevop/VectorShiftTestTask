@@ -16,21 +16,6 @@ import {
 export const PipelineToolbar = () => {
     return (
         <div style={{ padding: '10px' }}>
-            <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                marginBottom: '20px',
-                padding: '0 20px',
-                borderBottom: '1px solid #E5E7EB',
-                paddingBottom: '20px'
-            }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ color: '#6B7280', fontSize: '14px', fontWeight: '500' }}>Pipelines</span>
-                    <span style={{ color: '#9CA3AF' }}>/</span>
-                    <span style={{ color: '#111827', fontSize: '14px', fontWeight: '600' }}>Copy of Blog Article Generator</span>
-                </div>
-            </div>
 
             {/* Search and Tabs Row */}
             <div style={{
@@ -118,6 +103,6 @@ export const PipelineToolbar = () => {
                     </div>
                 ))}
             </div>
-        </div>
+        </div >
     );
 };
