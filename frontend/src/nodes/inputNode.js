@@ -47,7 +47,7 @@ export const InputNode = ({ id, data }) => {
       inputHandles={[]}
       outputHandles={[{ id: `${id}-value` }]}
       width={280}
-      height={230}
+      height={inputType === 'File' ? 300 : 230}
     >
       <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
         <span style={labelStyle}>Field Name</span>
@@ -107,6 +107,29 @@ export const InputNode = ({ id, data }) => {
           </div>
         </div>
       </label>
+      {inputType === 'File' && (
+        <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+          <span style={labelStyle}>File</span>
+          <input
+            type="file"
+            style={{
+              ...inputStyle,
+              padding: '8px',
+              fontSize: '12px',
+              cursor: 'pointer'
+            }}
+            onFocus={(e) => {
+              e.target.style.borderColor = '#10B981';
+              e.target.style.boxShadow = '0 0 0 3px rgba(16, 185, 129, 0.1)';
+              e.target.style.outline = 'none';
+            }}
+            onBlur={(e) => {
+              e.target.style.borderColor = '#E5E7EB';
+              e.target.style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.05)';
+            }}
+          />
+        </label>
+      )}
     </BaseNode>
   );
 }

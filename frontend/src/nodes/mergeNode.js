@@ -9,24 +9,26 @@ export const MergeNode = ({ id, data }) => {
 
   const inputStyle = {
     padding: '10px 12px',
-    fontSize: '13px',
-    border: '2px solid #e2e8f0',
+    fontSize: '14px',
+    border: '1px solid #E5E7EB',
     borderRadius: '8px',
     backgroundColor: '#ffffff',
-    color: '#1e293b',
+    color: '#111827',
     transition: 'all 0.2s ease',
     outline: 'none',
     width: '100%',
     fontFamily: 'inherit',
+    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   };
 
   const labelStyle = {
-    fontSize: '12px',
+    fontSize: '11px',
     fontWeight: '600',
-    color: '#475569',
-    marginBottom: '6px',
+    color: '#6B7280',
     textTransform: 'uppercase',
-    letterSpacing: '0.5px',
+    letterSpacing: '0.05em',
   };
 
   return (
@@ -40,53 +42,67 @@ export const MergeNode = ({ id, data }) => {
         { id: `${id}-input3`, style: { top: '75%' } }
       ]}
       outputHandles={[{ id: `${id}-output` }]}
-      width={260}
-      height={mergeStrategy === 'join' ? 220 : 180}
+      width={280}
+      height={mergeStrategy === 'join' ? 240 : 180}
     >
-      <label style={{ display: 'flex', flexDirection: 'column' }}>
+      <label style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
         <span style={labelStyle}>Strategy</span>
-        <select 
-          value={mergeStrategy} 
-          onChange={(e) => setMergeStrategy(e.target.value)}
-          style={{
-            ...inputStyle,
-            cursor: 'pointer',
-            appearance: 'none',
-            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23475569' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'right 12px center',
-            paddingRight: '36px',
-          }}
-          onFocus={(e) => {
-            e.target.style.borderColor = '#667eea';
-            e.target.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.1)';
-          }}
-          onBlur={(e) => {
-            e.target.style.borderColor = '#e2e8f0';
-            e.target.style.boxShadow = 'none';
-          }}
-        >
-          <option value="concat">Concatenate</option>
-          <option value="join">Join</option>
-          <option value="sum">Sum</option>
-          <option value="average">Average</option>
-        </select>
-      </label>
-      {mergeStrategy === 'join' && (
-        <label style={{ display: 'flex', flexDirection: 'column' }}>
-          <span style={labelStyle}>Separator</span>
-          <input 
-            type="text" 
-            value={separator} 
-            onChange={(e) => setSeparator(e.target.value)}
-            style={inputStyle}
+        <div style={{ position: 'relative' }}>
+          <select
+            value={mergeStrategy}
+            onChange={(e) => setMergeStrategy(e.target.value)}
+            style={{
+              ...inputStyle,
+              appearance: 'none',
+              paddingRight: '30px',
+              cursor: 'pointer'
+            }}
             onFocus={(e) => {
-              e.target.style.borderColor = '#667eea';
-              e.target.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.1)';
+              e.target.style.borderColor = '#14b8a6';
+              e.target.style.boxShadow = '0 0 0 3px rgba(20, 184, 166, 0.1)';
+              e.target.style.outline = 'none';
             }}
             onBlur={(e) => {
-              e.target.style.borderColor = '#e2e8f0';
-              e.target.style.boxShadow = 'none';
+              e.target.style.borderColor = '#E5E7EB';
+              e.target.style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.05)';
+            }}
+          >
+            <option value="concat">Concatenate</option>
+            <option value="join">Join</option>
+            <option value="sum">Sum</option>
+            <option value="average">Average</option>
+          </select>
+          <div style={{
+            position: 'absolute',
+            right: '10px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            pointerEvents: 'none',
+            color: '#94a3b8'
+          }}>
+            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+        </div>
+      </label>
+      {mergeStrategy === 'join' && (
+        <label style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <span style={labelStyle}>Separator</span>
+          <input
+            type="text"
+            value={separator}
+            onChange={(e) => setSeparator(e.target.value)}
+            placeholder=", "
+            style={inputStyle}
+            onFocus={(e) => {
+              e.target.style.borderColor = '#14b8a6';
+              e.target.style.boxShadow = '0 0 0 3px rgba(20, 184, 166, 0.1)';
+              e.target.style.outline = 'none';
+            }}
+            onBlur={(e) => {
+              e.target.style.borderColor = '#E5E7EB';
+              e.target.style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.05)';
             }}
           />
         </label>

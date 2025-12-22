@@ -140,13 +140,15 @@ export const PipelineUI = () => {
   return (
     <>
       <div ref={reactFlowWrapper} style={{
-        width: '100%',
-        height: 'calc(100vh - 120px)',
-        margin: '0 auto',
-        border: 'none',
-        borderRadius: '0',
-        boxShadow: 'none',
-        overflow: 'hidden'
+        width: '95%',
+        height: 'calc(100vh - 150px)',
+        margin: '10px auto',
+        border: '1px solid #E5E7EB',
+        borderRadius: '12px',
+        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+        backgroundColor: '#FCFCFD',
+        overflow: 'hidden',
+        position: 'relative'
       }}>
         <ReactFlow
           nodes={nodes}
@@ -162,7 +164,7 @@ export const PipelineUI = () => {
           snapGrid={[gridSize, gridSize]}
           connectionLineType='smoothstep'
         >
-          <Background color="#cbd5e1" gap={gridSize} variant="dots" size={1} />
+          <Background color="#E2E8F0" gap={gridSize} variant="dots" size={1.5} />
           <Controls style={{
             background: '#fff',
             border: '1px solid #e2e8f0',
